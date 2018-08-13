@@ -107,9 +107,10 @@ if mouse_check_button_released(mb_left) click = 1;
           <argument>
             <kind>1</kind>
             <string>draw_self();
-draw_set_colour(c_black);
+/* draw_set_colour(c_black);
 draw_set_halign(fa_center);
 draw_text(100, 100, "Direction " + string(global.dBullet) + "#lengx " + string(lengx) + "#lengy " + string(lengy));
+*/
 </string>
           </argument>
         </arguments>
