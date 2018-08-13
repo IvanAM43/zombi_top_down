@@ -94,7 +94,7 @@ if mouse_check_button_released(mb_left) click = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///player Movement
+            <string>///player movement
 
 
 var xDirection, yDirection;
