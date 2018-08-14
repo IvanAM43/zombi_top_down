@@ -6,10 +6,15 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\spr_player_torso</sprite>
     <sprite>sprites\spr_mobtest</sprite>
     <sprite>sprites\spr_bullet</sprite>
-    <sprite>sprites\spr_player_legs</sprite>
+    <sprites name="spr_player">
+      <sprites name="spr_player_legs">
+        <sprite>sprites\spr_player_legs_running</sprite>
+        <sprite>sprites\spr_player_legs_standing</sprite>
+      </sprites>
+      <sprite>sprites\spr_player_torso</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_test_room</background>

@@ -31,7 +31,12 @@ global.dBullet = 1;
 click = 1;
 
 global.player_legs = instance_create(x,y, obj_player_legs);
+
+
 global.player_view = instance_create(x,y, obj_view);
+view_object[0] = global.player_view;
+view_hborder[0] = view_wview[0] / 2;
+view_vborder[0] = view_hview[0] / 2;
 </string>
           </argument>
         </arguments>
@@ -96,19 +101,26 @@ if mouse_check_button_released(mb_left) click = 1;
           <argument>
             <kind>1</kind>
             <string>///player movement
-
-
 var xDirection, yDirection;
 xDirection = keyboard_check(ord('D')) - keyboard_check(ord('A'));//si le keyboardcheck est vrai, donne 1, alors 1-0 x=1
 yDirection = keyboard_check(ord('S')) - keyboard_check(ord('W'));
 
-xold = x;
-yold = y;
-
 x += xDirection * walkingSpeed;
 y += yDirection * walkingSpeed;
 
-global.player_legs.image_angle = point_direction(xold,yold,x,y);
+if x != xprevious || y != yprevious
+    {
+    if(global.player_legs.sprite_index != spr_player_legs_running) 
+        global.player_legs.image_index = 0;
+    global.player_legs.sprite_index = spr_player_legs_running;
+    };
+else
+    {
+    global.player_legs.sprite_index = spr_player_legs_standing;
+    };
+
+       
+global.player_legs.image_angle = point_direction(xprevious,yprevious,x,y);
 global.player_legs.x = x;
 global.player_legs.y = y;
 
@@ -139,8 +151,10 @@ image_angle = point_direction(x, y, mouse_x, mouse_y);
             <kind>1</kind>
             <string>///player view
 
-global.player_view.x = x;
-global.player_view.y = y;
+global.player_view.x = (x + mouse_x) / 2;
+global.player_view.y = (y + mouse_y) / 2;
+
+
 </string>
           </argument>
         </arguments>
