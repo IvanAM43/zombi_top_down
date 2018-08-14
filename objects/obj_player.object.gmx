@@ -107,12 +107,14 @@ yDirection = keyboard_check(ord('S')) - keyboard_check(ord('W'));
 
 x += xDirection * walkingSpeed;
 y += yDirection * walkingSpeed;
+delta_speed = sqrt(sqr(x-xprevious)+sqr(y-yprevious));
 
 if x != xprevious || y != yprevious
     {
     if(global.player_legs.sprite_index != spr_player_legs_running) 
         global.player_legs.image_index = 0;
     global.player_legs.sprite_index = spr_player_legs_running;
+    global.player_legs.image_speed = delta_speed / walkingSpeed;
     };
 else
     {
@@ -180,7 +182,7 @@ global.player_view.y = (y + mouse_y) / 2;
             <string>draw_self();
 draw_set_colour(c_black);
 draw_set_halign(fa_center);
-draw_text(100, 100, "Direction " + string(global.dBullet) + "#lengx " + string(lengx) + "#lengy " + string(lengy));
+draw_text(100, 100, "Direction " + string(global.dBullet) + "#lengx " + string(lengx) + "#lengy " + string(lengy) + "#speed" + string(delta_speed));
 </string>
           </argument>
         </arguments>
