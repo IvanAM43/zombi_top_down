@@ -53,10 +53,30 @@ HP = 3;
           <argument>
             <kind>1</kind>
             <string>/// destroy instance
-
 if (HP &lt;= 0) instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///move toward player
 
-if point_distance(x, y, obj_player.x, obj_player.y) &gt; 5
+if point_distance(x, y, obj_player.x, obj_player.y) &gt; 10
     {
     move_towards_point(obj_player.x, obj_player.y, 1);
     }
@@ -65,9 +85,46 @@ else speed = 0;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Collisions
+
+if hspeed!=0
+if !place_free(x+hspeed,y)
+{
+    if hspeed&gt;0 move_contact_solid(0,hspeed)
+    if hspeed&lt;0 move_contact_solid(180,-hspeed)
+    hspeed=0
+}
+
+if vspeed!=0
+if !place_free(x+hspeed,y+vspeed)
+{
+    if vspeed&gt;0 move_contact_solid(270,vspeed)
+    if vspeed&lt;0 move_contact_solid(90,-vspeed)
+    vspeed=0
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
   </events>
-  <PhysicsObject>-1</PhysicsObject>
+  <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>
   <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
@@ -78,8 +135,5 @@ else speed = 0;
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>-1</PhysicsObjectKinematic>
-  <PhysicsShapePoints>
-    <point>32,32</point>
-    <point>32,32</point>
-  </PhysicsShapePoints>
+  <PhysicsShapePoints/>
 </object>

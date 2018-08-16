@@ -101,31 +101,28 @@ if mouse_check_button_released(mb_left) click = 1;
           <argument>
             <kind>1</kind>
             <string>///player movement
-var xDirection, yDirection;
-xDirection = keyboard_check(ord('D')) - keyboard_check(ord('A'));//si le keyboardcheck est vrai, donne 1, alors 1-0 x=1
-yDirection = keyboard_check(ord('S')) - keyboard_check(ord('W'));
+hspeed = walkingSpeed * (keyboard_check(ord('D')) - keyboard_check(ord('A')));//si le keyboardcheck est vrai, donne 1, alors 1-0 x=1
+vspeed = walkingSpeed * (keyboard_check(ord('S')) - keyboard_check(ord('W')));
 
-x += xDirection * walkingSpeed;
-y += yDirection * walkingSpeed;
-delta_speed = sqrt(sqr(x-xprevious)+sqr(y-yprevious));
-
-if x != xprevious || y != yprevious
+if hspeed != 0 || vspeed != 0
     {
     if(global.player_legs.sprite_index != spr_player_legs_running) 
         global.player_legs.image_index = 0;
     global.player_legs.sprite_index = spr_player_legs_running;
-    global.player_legs.image_speed = delta_speed / walkingSpeed;
+    global.player_legs.image_speed = (abs(speed) / walkingSpeed);
     };
 else
     {
     global.player_legs.sprite_index = spr_player_legs_standing;
     };
 
-       
-global.player_legs.image_angle = point_direction(xprevious,yprevious,x,y);
+//points the legs in the direction of travel    
+global.player_legs.image_angle = point_direction(x,y,x+hspeed,y+vspeed);
 global.player_legs.x = x;
 global.player_legs.y = y;
 
+
+//points the torso at the mouse
 image_angle = point_direction(x, y, mouse_x, mouse_y);
 
 
@@ -161,6 +158,43 @@ global.player_view.y = (y + mouse_y) / 2;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Collisions
+
+if hspeed!=0
+if !place_free(x+hspeed,y)
+{
+    if hspeed&gt;0 move_contact_solid(0,hspeed)
+    if hspeed&lt;0 move_contact_solid(180,-hspeed)
+    hspeed=0
+}
+
+if vspeed!=0
+if !place_free(x+hspeed,y+vspeed)
+{
+    if vspeed&gt;0 move_contact_solid(270,vspeed)
+    if vspeed&lt;0 move_contact_solid(90,-vspeed)
+    vspeed=0
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -179,17 +213,23 @@ global.player_view.y = (y + mouse_y) / 2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>///Debug Hud
+
+draw_self();
 draw_set_colour(c_black);
 draw_set_halign(fa_center);
-draw_text(100, 100, "Direction " + string(global.dBullet) + "#lengx " + string(lengx) + "#lengy " + string(lengy) + "#speed" + string(delta_speed));
+draw_text(x, y+20, "Direction " + string(global.dBullet) 
+    + "#lengx " + string(lengx) 
+    + "#lengy " + string(lengy) 
+    + "#h speed" + string(hspeed)
+    + "#v speed" + string(vspeed));
 </string>
           </argument>
         </arguments>
       </action>
     </event>
   </events>
-  <PhysicsObject>-1</PhysicsObject>
+  <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>
   <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
@@ -200,8 +240,5 @@ draw_text(100, 100, "Direction " + string(global.dBullet) + "#lengx " + string(l
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints>
-    <point>32,32</point>
-    <point>32,32</point>
-  </PhysicsShapePoints>
+  <PhysicsShapePoints/>
 </object>
