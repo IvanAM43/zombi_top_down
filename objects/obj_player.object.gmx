@@ -63,7 +63,6 @@ view_vborder[0] = view_hview[0] / 2;
 // Get the instance direction, plus usefull variables
 
 global.dBullet = point_direction(x, y, mouse_x, mouse_y);
-
 lengx = lengthdir_x(36, global.dBullet);
 lengy = lengthdir_y(36, global.dBullet);
 
@@ -80,54 +79,6 @@ if (mouse_check_button(mb_left) &amp;&amp; click &lt;= 0)
 // spam enable
 
 if mouse_check_button_released(mb_left) click = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///player movement
-hspeed = walkingSpeed * (keyboard_check(ord('D')) - keyboard_check(ord('A')));//si le keyboardcheck est vrai, donne 1, alors 1-0 x=1
-vspeed = walkingSpeed * (keyboard_check(ord('S')) - keyboard_check(ord('W')));
-
-if hspeed != 0 || vspeed != 0
-    {
-    if(global.player_legs.sprite_index != spr_player_legs_running) 
-        global.player_legs.image_index = 0;
-    global.player_legs.sprite_index = spr_player_legs_running;
-    global.player_legs.image_speed = (abs(speed) / walkingSpeed);
-    };
-else
-    {
-    global.player_legs.sprite_index = spr_player_legs_standing;
-    };
-
-//points the legs in the direction of travel    
-global.player_legs.image_angle = point_direction(x,y,x+hspeed,y+vspeed);
-global.player_legs.x = x;
-global.player_legs.y = y;
-
-
-//points the torso at the mouse
-image_angle = point_direction(x, y, mouse_x, mouse_y);
-
-
-
-
 </string>
           </argument>
         </arguments>
@@ -195,6 +146,54 @@ if !place_free(x+hspeed,y+vspeed)
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///player movement
+hspeed = walkingSpeed * (keyboard_check(ord('D')) - keyboard_check(ord('A')));//si le keyboardcheck est vrai, donne 1, alors 1-0 x=1
+vspeed = walkingSpeed * (keyboard_check(ord('S')) - keyboard_check(ord('W')));
+
+if hspeed != 0 || vspeed != 0
+    {
+    if(global.player_legs.sprite_index != spr_player_legs_running) 
+        global.player_legs.image_index = 0;
+    global.player_legs.sprite_index = spr_player_legs_running;
+    global.player_legs.image_speed = (abs(speed) / walkingSpeed);
+    };
+else
+    {
+    global.player_legs.sprite_index = spr_player_legs_standing;
+    };
+
+//points the legs in the direction of travel    
+global.player_legs.image_angle = point_direction(x,y,x+hspeed,y+vspeed);
+global.player_legs.x = x;
+global.player_legs.y = y;
+
+
+//points the torso at the mouse
+image_angle = point_direction(x, y, mouse_x, mouse_y);
+
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -222,7 +221,8 @@ draw_text(x, y+20, "Direction " + string(global.dBullet)
     + "#lengx " + string(lengx) 
     + "#lengy " + string(lengy) 
     + "#h speed" + string(hspeed)
-    + "#v speed" + string(vspeed));
+    + "#v speed" + string(vspeed)
+    + "#speed" + string((abs(speed) / walkingSpeed)));
 </string>
           </argument>
         </arguments>

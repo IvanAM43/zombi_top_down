@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//variables
+            <string>///variables
 speed = 5;
 direction = global.dBullet;
 boum = 0;

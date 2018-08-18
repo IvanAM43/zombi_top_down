@@ -33,8 +33,8 @@
     <objects name="obj_player">
       <object>objects\obj_player</object>
       <object>objects\obj_player_legs</object>
+      <object>objects\obj_view</object>
     </objects>
-    <object>objects\obj_view</object>
     <objects name="obj_turfs">
       <object>objects\obj_wall</object>
     </objects>
