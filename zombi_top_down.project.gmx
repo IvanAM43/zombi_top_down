@@ -6,25 +6,18 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
+    <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_mobtest</sprite>
     <sprite>sprites\spr_bullet</sprite>
-    <sprites name="spr_player">
-      <sprites name="spr_player_legs"/>
-      <sprites name="spr_player_torso"/>
-    </sprites>
-    <sprites name="spr_turfs"/>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_test_room</background>
   </backgrounds>
   <paths name="paths"/>
   <objects name="objects">
+    <object>objects\obj_player</object>
     <object>objects\obj_mobtest</object>
     <object>objects\obj_bullet</object>
-    <objects name="obj_player">
-      <object>objects\obj_player</object>
-    </objects>
-    <objects name="obj_turfs"/>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_test_room</room>
