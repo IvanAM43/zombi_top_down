@@ -134,7 +134,6 @@ if !place_free(x+hspeed,y)
     if hspeed&lt;0 move_contact_solid(180,-hspeed)
     hspeed=0
 }
-
 if vspeed!=0
 if !place_free(x+hspeed,y+vspeed)
 {
