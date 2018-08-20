@@ -150,11 +150,21 @@ if mouse_check_button_released(mb_left) click = 1;
           <argument>
             <kind>1</kind>
             <string>///player view
+view_direction = point_direction(x, y, mouse_x, mouse_y);
+view_distance = point_distance(x, y, mouse_x, mouse_y)/2;
+distance_limit = 300;
 
+if view_distance &gt;= distance_limit
+    {view_distance = distance_limit;}
+
+global.player_view.x = x + lengthdir_x(view_distance,view_direction);
+global.player_view.y = y + lengthdir_y(view_distance,view_direction);
+
+    
+/*
 global.player_view.x = (x + mouse_x) / 2;
 global.player_view.y = (y + mouse_y) / 2;
-
-
+*/
 </string>
           </argument>
         </arguments>
@@ -176,7 +186,6 @@ global.player_view.y = (y + mouse_y) / 2;
           <argument>
             <kind>1</kind>
             <string>///Collisions
-
 if hspeed!=0
 if !place_free(x+hspeed,y+vspeed)
 {
@@ -221,8 +230,8 @@ draw_set_halign(fa_center);
 draw_text(x, y+20, "Direction " + string(global.dBullet) 
     + "#lengx " + string(lengx) 
     + "#lengy " + string(lengy) 
-    + "#h speed" + string(hspeed)
-    + "#v speed" + string(vspeed)
+    + "#view_direction" + string(view_direction)
+    + "#view_distance" + string(view_distance)
     + "#speed" + string((abs(speed) / walkingSpeed)));
 </string>
           </argument>
